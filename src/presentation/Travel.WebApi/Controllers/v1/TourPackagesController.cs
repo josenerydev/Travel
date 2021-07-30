@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-using System.Threading.Tasks;
-
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Travel.Application.TourPackages.Commands.CreateTourPackage;
 using Travel.Application.TourPackages.Commands.DeleteTourPackage;
 using Travel.Application.TourPackages.Commands.UpdateTourPackage;
 using Travel.Application.TourPackages.Commands.UpdateTourPackageDetail;
 
-namespace Travel.WebApi.Controllers
+namespace Travel.WebApi.Controllers.v1
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class TourPackagesController : ApiController
     {
         [HttpPost]
