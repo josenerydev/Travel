@@ -24,7 +24,7 @@ namespace Travel.Identity.Services
                 Id = 1,
                 FirstName = "Yourname",
                 LastName = "Yoursurname",
-                Username = "yoursuperhero",
+                Email = "yoursuperhero@gmail.com",
                 Password = "Pass123!"
             }
         };
@@ -35,7 +35,7 @@ namespace Travel.Identity.Services
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)
         {
-            var user = _users.SingleOrDefault(u => u.Username == model.Username && u.Password == model.Password);
+            var user = _users.SingleOrDefault(u => u.Email == model.Email && u.Password == model.Password);
 
             if (user == null)
                 return null;

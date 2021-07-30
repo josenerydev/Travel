@@ -77,7 +77,7 @@ namespace Travel.Data.Migrations
             modelBuilder.Entity("Travel.Domain.Entities.TourPackage", b =>
                 {
                     b.HasOne("Travel.Domain.Entities.TourList", "List")
-                        .WithMany("Tours")
+                        .WithMany("TourPackages")
                         .HasForeignKey("ListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -87,7 +87,7 @@ namespace Travel.Data.Migrations
 
             modelBuilder.Entity("Travel.Domain.Entities.TourList", b =>
                 {
-                    b.Navigation("Tours");
+                    b.Navigation("TourPackages");
                 });
 #pragma warning restore 612, 618
         }

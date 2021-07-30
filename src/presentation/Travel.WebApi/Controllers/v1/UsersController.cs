@@ -20,7 +20,7 @@ namespace Travel.WebApi.Controllers.v1
             var response = _userService.Authenticate(model);
 
             if (response == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return BadRequest(new { message = "Email or password is incorrect" });
 
             return Ok(response);
         }

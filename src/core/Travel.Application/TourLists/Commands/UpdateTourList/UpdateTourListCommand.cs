@@ -35,6 +35,8 @@ namespace Travel.Application.TourLists.Commands.UpdateTourList
             }
 
             entity.City = request.City;
+            entity.Country = request.Country;
+            entity.About = request.About;
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
