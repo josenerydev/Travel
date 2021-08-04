@@ -27,7 +27,6 @@ namespace Travel.WebApi.Controllers.v2
         [HttpPost]
         public IEnumerable<WeatherForecast> Post(string city)
         {
-
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
