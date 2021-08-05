@@ -26,19 +26,30 @@ namespace Travel.WebApi.Controllers.v1
             return await Mediator.Send(command);
         }
 
+        //[HttpPut("{id}")]
+        //public async Task<ActionResult> Update(int id, UpdateTourPackageCommand command)
+        //{
+        //    if (id != command.Id)
+        //        return BadRequest();
+
+        //    await Mediator.Send(command);
+
+        //    return NoContent();
+        //}
+
+        //[HttpPut("[action]")]
+        //public async Task<ActionResult> UpdateItemDetails(int id, UpdateTourPackageDetailCommand command)
+        //{
+        //    if (id != command.Id)
+        //        return BadRequest();
+
+        //    await Mediator.Send(command);
+
+        //    return NoContent();
+        //}
+
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, UpdateTourPackageCommand command)
-        {
-            if (id != command.Id)
-                return BadRequest();
-
-            await Mediator.Send(command);
-
-            return NoContent();
-        }
-
-        [HttpPut("[action]")]
-        public async Task<ActionResult> UpdateItemDetails(int id, UpdateTourPackageDetailCommand command)
+        public async Task<ActionResult> Update(int id, UpdateTourPackageDetailCommand command)
         {
             if (id != command.Id)
                 return BadRequest();
