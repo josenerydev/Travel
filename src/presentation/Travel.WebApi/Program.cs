@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 using Serilog;
 using Serilog.Events;
@@ -8,12 +11,15 @@ using Serilog.Formatting.Compact;
 
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
+
+using Travel.Data.Contexts;
 
 namespace Travel.WebApi
 {
     public class Program
     {
-        public static int Main(string[] args)
+        public static async Task<int> Main(string[] args)
         {
             var name = Assembly.GetExecutingAssembly().GetName();
             Log.Logger = new LoggerConfiguration()
@@ -37,7 +43,32 @@ namespace Travel.WebApi
             try
             {
                 Log.Information("Starting host");
-                CreateHostBuilder(args).Build().Run();
+                var host = CreateHostBuilder(args).Build();
+
+                using (var scope = host.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+
+                    try
+                    {
+                        var context = services.GetRequiredService<ApplicationDbContext>();
+
+                        if (context.Database.IsSqlServer())
+                            await context.Database.MigrateAsync();
+
+                        await ApplicationDbContextSeed.SeedSampleDataAsync(context);
+                    }
+                    catch (Exception e)
+                    {
+                        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                        logger.LogError(e, "An error occurred while migrating or seeding the database");
+
+                        throw;
+                    }
+                }
+
+                await host.RunAsync();
+
                 return 0;
             }
             catch (Exception e)
