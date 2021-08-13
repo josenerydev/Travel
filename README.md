@@ -19,4 +19,5 @@
 * Redis
 * xUnit
 * Unit tests
+* Fluent Assertions
 * Integration tests
